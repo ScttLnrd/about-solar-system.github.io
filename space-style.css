@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Content panel – interactive buttons and text */
+.content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    margin: auto;
+    z-index: 2;           /* Above overlay */
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    pointer-events: none; /* Container doesn't block, children handle events */
+}
+
+h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    pointer-events: none;
+}
+
+p {
+    pointer-events: none;
+    margin-bottom: 20px;
+}
+
+.planet-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    pointer-events: auto; /* Buttons themselves are clickable */
+}
+
+button {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: transform 0.2s, background 0.2s;
+}
+
+button:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.15);
+}
+
+
+@media (max-width: 700px) {
+    button { padding: 0.5rem 1rem; font-size: 0.8rem; }
+    h1 { font-size: 1.8rem; }
+}
