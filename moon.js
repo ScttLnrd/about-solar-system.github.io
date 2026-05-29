@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 const loader = new THREE.TextureLoader();
 export const moonMesh = new THREE.Mesh(
-    new THREE.SphereGeometry(0.13, 128, 128),
+    new THREE.SphereGeometry(0.22, 128, 128),
     new THREE.MeshStandardMaterial({ map: loader.load('assets/8k_moon.jpg'), roughness: 0.8 })
 );
 const moonTiltRad = 1.5 * Math.PI / 180;

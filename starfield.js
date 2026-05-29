@@ -36,7 +36,7 @@ export function createStarfield(scene) {
         sprite.userData = {
             speed: 0.6 + Math.random() * 2.5,
             phase: Math.random() * Math.PI * 2,
-            baseScale: 0.08 + Math.random() * 0.12
+            baseScale: 0.15 + Math.random() * 0.12
         };
         sprite.scale.set(sprite.userData.baseScale, sprite.userData.baseScale, 1);
         scene.add(sprite);

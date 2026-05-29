@@ -2,8 +2,8 @@ import * as THREE from 'three';
 export const asteroidGroup = new THREE.Group();
 const asteroidCount = 335;
 // Updated belt to lie between Mars (54.4) and Jupiter (91.2)
-const beltInnerRadius = 67.0;
-const beltOuterRadius = 75.0;
+const beltInnerRadius = 175;
+const beltOuterRadius = 190;
 const beltHeight = 1.2;
 
 function createLumpyAsteroid(baseRadius, lumpStrength, detail, baseColor) {

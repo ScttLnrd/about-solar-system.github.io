@@ -119,7 +119,7 @@ scene.background = new THREE.Color(0x010008);
 scene.fog = new THREE.FogExp2(0x010008, 0.0003);
 
 // --- CAMERA ---
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 5000);
 camera.position.set(0, 5, 15);
 camera.lookAt(0, 0, 0);
 
@@ -140,12 +140,12 @@ controls.enablePan = false;
 controls.zoomSpeed = 1.2;
 controls.rotateSpeed = 0.8;
 controls.target.set(0, 0, 0);
-controls.minDistance = 5.0;
-controls.maxDistance = 400.0;
+controls.minDistance = 50.0;
+controls.maxDistance = 1000.0;
 controls.maxPolarAngle = Math.PI;
 
 // Overview camera (adjusted for new orbit distances)
-const overviewCameraPos = new THREE.Vector3(0, 100, 220);
+const overviewCameraPos = new THREE.Vector3(0, 150, 600);
 const overviewTarget = new THREE.Vector3(0, 0, 0);
 
 // --- BLOOM (tuned for planets) ---
@@ -161,7 +161,7 @@ effectComposer.addPass(bloomPass);
 // --- TEXTURE LOADER & SKYBOX ---
 const loader = new THREE.TextureLoader();
 const skyTexture = loader.load('assets/8k_stars_milky_way.jpg');
-const skyboxGeo = new THREE.SphereGeometry(450, 64, 64);
+const skyboxGeo = new THREE.SphereGeometry(2000, 64, 64);
 const skyboxMat = new THREE.MeshBasicMaterial({ map: skyTexture, side: THREE.BackSide });
 const skybox = new THREE.Mesh(skyboxGeo, skyboxMat);
 scene.add(skybox);
@@ -188,14 +188,14 @@ function addOrbitRing(radius, color, yOffset = 0) {
     const ring = new THREE.LineLoop(geo, mat);
     scene.add(ring);
 }
-addOrbitRing(16.8, 0x88aaff);
-addOrbitRing(25.9, 0xffaa88);
-addOrbitRing(40.3, 0x44aaff);
-addOrbitRing(54.4, 0xff6666);
-addOrbitRing(91.2, 0xccaaff);
-addOrbitRing(107.2, 0xddaaff);
-addOrbitRing(126.4, 0xaaccff);
-addOrbitRing(147.2, 0x88bbff);
+addOrbitRing(50, 0x88aaff);    // Mercury
+addOrbitRing(75, 0xffaa88);    // Venus
+addOrbitRing(100, 0x44aaff);   // Earth
+addOrbitRing(125, 0xff6666);   // Mars
+addOrbitRing(250, 0xccaaff);   // Jupiter
+addOrbitRing(300, 0xddaaff);   // Saturn
+addOrbitRing(350, 0xaaccff);   // Uranus
+addOrbitRing(400, 0x88bbff);   // Neptune
 
 // --- MOON ORBIT RING ---
 const moonRingPoints = [];
@@ -250,20 +250,20 @@ const transitionDuration = 0.25;
 let nextFollowObject = null, nextFollowOffset = new THREE.Vector3(), nextFollowTargetOffset = new THREE.Vector3();
 
 // Store original minDistance for reset
-const originalMinDistance = 5.0;
+const originalMinDistance = 50.0;
 
 // Per-body minimum zoom distances (closer for small bodies, farther for large/gas giants)
 const bodyMinDistances = {
-    sun: 8.0,
-    mercury: 2,
-    venus: 2.2,
-    earth: 2.2,
-    mars: 2.0,
-    jupiter: 5.5,
-    saturn: 6.0,
-    uranus: 5.0,
-    neptune: 5.0,
-    moon: 1
+    sun: 50.0,
+    mercury: 3.0,
+    venus: 4.0,
+    earth: 4.0,
+    mars: 3.0,
+    jupiter: 14.0,
+    saturn: 16.0,
+    uranus: 11.0,
+    neptune: 11.0,
+    moon: 1.4
 };
 
 function flyTo(object, offsetDir, distance, targetOffset, bodyId = null) {

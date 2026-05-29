@@ -3,7 +3,7 @@ const loader = new THREE.TextureLoader();
 export const earthGroup = new THREE.Group();
 const dayTex = loader.load('assets/8k_earth_daymap.jpg');
 const nightTex = loader.load('assets/8k_earth_nightmap.jpg');
-const geo = new THREE.SphereGeometry(0.48, 128, 128);
+const geo = new THREE.SphereGeometry(0.65, 128, 128);
 const mat = new THREE.MeshStandardMaterial({
     map: dayTex,
     emissiveMap: nightTex,
@@ -18,7 +18,7 @@ const tiltRad = 23.5 * Math.PI / 180;
 earthGroup.rotation.x = tiltRad;
 earthGroup.rotation.z = 0.02;
 
-export const earthOrbitRadius = 40.3;
+export const earthOrbitRadius = 100;
 export let earthAngle = 3.0;
 export const earthSpeed = 0.0012;
 

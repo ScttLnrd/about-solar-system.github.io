@@ -3,7 +3,7 @@ import * as THREE from 'three';
 const loader = new THREE.TextureLoader();
 export const saturnGroup = new THREE.Group();
 const saturnTex = loader.load('assets/8k_saturn.jpg');
-const saturnGeo = new THREE.SphereGeometry(0.92, 256, 256);
+const saturnGeo = new THREE.SphereGeometry(1.92, 256, 256);
 const saturnMat = new THREE.MeshStandardMaterial({ map: saturnTex, roughness: 0.8, metalness: 0.15 });
 const saturnMesh = new THREE.Mesh(saturnGeo, saturnMat);
 saturnGroup.add(saturnMesh);
@@ -12,8 +12,8 @@ saturnGroup.rotation.x = tiltRad;
 saturnGroup.rotation.z = 0.02;
 
 const ringTexture = loader.load('assets/8k_saturn_ring_alpha.png');
-const ringInnerRadius = 0.7;
-const ringOuterRadius = 2.4;
+const ringInnerRadius = 2;
+const ringOuterRadius = 4;
 const segments = 128;
 const vertices = [];
 const uvs = [];
@@ -51,7 +51,7 @@ const ringMat = new THREE.MeshStandardMaterial({
 const saturnRing = new THREE.Mesh(ringGeo, ringMat);
 saturnGroup.add(saturnRing);
 
-export const saturnOrbitRadius = 107.2;
+export const saturnOrbitRadius = 300;
 export let saturnAngle = 6.0;
 export const saturnSpeed = 0.0003;
 

@@ -3,7 +3,7 @@ import * as THREE from 'three';
 const loader = new THREE.TextureLoader();
 export const uranusGroup = new THREE.Group();
 const uranusTex = loader.load('assets/2k_uranus.jpg');
-const uranusGeo = new THREE.SphereGeometry(0.85, 256, 256);
+const uranusGeo = new THREE.SphereGeometry(1.35, 256, 256);
 const uranusMat = new THREE.MeshStandardMaterial({ map: uranusTex, roughness: 0.8, metalness: 0.1 });
 const uranusMesh = new THREE.Mesh(uranusGeo, uranusMat);
 uranusGroup.add(uranusMesh);
@@ -13,8 +13,8 @@ uranusGroup.rotation.x = uranusTiltRad;
 uranusGroup.rotation.z = 0.01;
 
 const ringTexture = loader.load('assets/8k_saturn_ring_alpha.png');
-const ringInnerRadius = 1.63;
-const ringOuterRadius = 1.68;
+const ringInnerRadius = 2.63;
+const ringOuterRadius = 2.78;
 const segments = 128;
 const vertices = [];
 const uvs = [];
@@ -52,7 +52,7 @@ const ringMat = new THREE.MeshStandardMaterial({
 const uranusRing = new THREE.Mesh(ringGeo, ringMat);
 uranusGroup.add(uranusRing);
 
-export const uranusOrbitRadius = 126.4;
+export const uranusOrbitRadius = 350;
 export let uranusAngle = 1.2;
 export const uranusSpeed = 0.00022;
 
