@@ -1,63 +1,531 @@
 body {
     margin: 0;
     overflow: hidden;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Content panel – interactive buttons and text */
-.content {
-    position: absolute;
+/* ===== LEFT SIDEBAR ===== */
+.sidebar-row {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: stretch;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.sidebar {
+    width: 260px;
+    backdrop-filter: blur(12px);
+    background: rgba(8, 12, 25, 0.342);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    transition: width 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
-    justify-self: center;
-    margin: auto;
-    z-index: 2;           /* Above overlay */
+    padding: 1rem 0;
+    pointer-events: auto;
+    overflow-x: hidden;
+    white-space: nowrap;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.3);
+}
+
+.sidebar.collapsed {
+    width: 0;
+    padding: 0;
+    border-right: none;
+}
+
+.sidebar-toggle {
+    background: linear-gradient(to right, #a4bcfa28, #8dadfd15, #8dadfd0a, #8dadfd00, #0000007e, #000000ab);
+    backdrop-filter: blur(8px);
+    border-left: none;
     color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 36px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
+}
+
+.sidebar-toggle:hover {
+    background: linear-gradient(to right, #a4bcfa3f, #8dadfd2c, #8dadfd17, #8dadfd0a, #20283d07, #00000025);
+    width: 42px;
+}
+
+.sidebar-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
     text-align: center;
-    padding: 2rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    pointer-events: none; /* Container doesn't block, children handle events */
+    margin: 1rem 1rem 0.5rem 1rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
 
-h1 {
-    font-size: 3rem;
-    text-shadow: 0 0 10px rgba(0,0,0,0.7);
-    pointer-events: none;
-}
-
-p {
-    pointer-events: none;
-    margin-bottom: 20px;
+.sidebar-title::after {
+    content: '';
+    display: block;
+    width: 70%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.4);
+    margin: 0.75rem auto 0;
 }
 
 .planet-buttons {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-    pointer-events: auto; /* Buttons themselves are clickable */
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0 1rem;
+    margin-top: 1.5rem;
 }
 
-button {
-    background: rgba(0, 0, 0, 0.6);
+.planet-buttons button {
+    background: rgba(0, 0, 0, 0.322);
     border: 1px solid rgba(255,255,255,0.3);
     color: white;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 30px;
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 40px;
     cursor: pointer;
     backdrop-filter: blur(4px);
-    transition: transform 0.2s, background 0.2s;
+    transition: all 0.2s;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
-button:hover {
-    background: rgba(255,255,255,0.2);
-    transform: scale(1.15);
+.planet-buttons button:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.02);
+    border-color: rgba(255,255,255,0.5);
+}
+
+.planet-buttons button.active {
+    background: rgba(100, 150, 255, 0.5);
+    border-color: #ffffffaa;
+    box-shadow: 0 0 12px rgba(100,150,255,0.4);
+    transform: scale(1.07);
+}
+
+#aboutLink{
+    background: rgba(47, 49, 87, 0.171);
+}
+
+#aboutLink:hover {
+    background: rgba(72, 74, 121, 0.527);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 1rem;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+}
+
+.divider {
+    margin: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-size: 0.7rem;
+}
+
+/* ===== NEW INFO PANEL (right side, with margins) ===== */
+.info-panel {
+    position: fixed;
+    right: 145px;
+    top: 24px;
+    bottom: 24px;
+    width: 440px;
+    height: calc(90vh - 48px);
+    align-self: center;
+    background: rgba(12, 18, 35, 0.055);
+    backdrop-filter: blur(18px);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 30;
+    transition: transform 0.3s ease, opacity 0.25s;
+    font-family: 'Segoe UI', system-ui;
+    color: #f0f3fa;
+}
+
+.info-panel.hidden {
+    transform: translateX(calc(100% + 30px));
+    opacity: 0;
+    pointer-events: none;
+}
+
+.info-panel-header {
+    padding: 1.2rem 1.5rem 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.view-btn-panel {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: white;
+    border-radius: 40px;
+    padding: 5px 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    backdrop-filter: blur(4px);
+    margin-right: 12px;
+}
+
+.view-btn-panel:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.02);
+}
+
+.info-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.3px;
+    background: linear-gradient(135deg, #fff, #aaccff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.info-content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px dashed rgba(255,255,255,0.2);
+    padding: 0.3rem 0;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #ffcf9a;
+    letter-spacing: 0.3px;
+}
+
+.info-value {
+    text-align: right;
+    font-weight: 400;
+    color: #eef3ff;
+}
+
+.about-box {
+    background: rgba(0, 0, 0, 0.445);
+    border-radius: 18px;
+    padding: 0.8rem 1rem;
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    border-left: 3px solid #88aaff;
+}
+.about-box::-webkit-scrollbar {
+    width: 2px;
+}
+.about-box::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+.about-box::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+.fun-fact-box {
+    background: rgba(189, 148, 73, 0.1);
+    border-radius: 18px;
+    padding: 0.8rem 1rem;
+    font-style: italic;
+    font-size: 0.85rem;
+    border-left: 3px solid #ffbc6e;
+}
+
+.links-area a {
+    color: #88ccff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-right: 16px;
+    transition: 0.2s;
+}
+
+.links-area a:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+/* custom scrollbar */
+.info-content-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+.info-content-scroll::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+
+.info-content-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
 }
 
 
+
+/* TRAPEZOID TOGGLE BUTTON (right edge) */
+.info-trapezoid {
+    background: linear-gradient(to left, #a4bcfa28, #8dadfd15, #8dadfd0a, #8dadfd00, #0000007e, #000000ab);
+    backdrop-filter: blur(8px);
+    border-left: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 36px;
+    height: 100vh;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    clip-path: polygon(0% 15%, 100% 0%, 100% 100%, 0% 85%);
+    box-shadow: -2px 0 12px rgba(0,0,0,0.3);
+    right: 0;
+    position: fixed;
+    border-right: none;
+    z-index: 35;
+    transition: all 0.2s ease;
+}
+
+.info-trapezoid:hover {
+    background: linear-gradient(to left, #a4bcfa3f, #8dadfd2c, #8dadfd17, #8dadfd0a, #20283d07, #00000025);
+    width: 42px;
+}
+
+.info-trapezoid.hidden {
+    transform: translateX(calc(100% + 30px));
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+/* Mobile responsiveness */
 @media (max-width: 700px) {
-    button { padding: 0.5rem 1rem; font-size: 0.8rem; }
-    h1 { font-size: 1.8rem; }
+    .info-panel {
+        width: 280px;
+        right: 12px;
+        top: 12px;
+        bottom: 12px;
+    }
+    .sidebar {
+        width: 220px;
+    }
+}
+
+.debug-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #0f0;
+    font-family: monospace;
+    font-size: 12px;
+    z-index: 1000;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    opacity: 0;
+    font-weight: bold;
+    text-shadow: 0 0 2px black;
+}
+.debug-panel.visible {
+    opacity: 1;
+    pointer-events: none;
+}
+.debug-panel h4 {
+    margin: 0 0 6px 0;
+    color: #ffaa88;
+}
+.debug-panel p {
+    margin: 4px 0;
+}
+.debug-panel .hint {
+    color: #aaa;
+    font-size: 10px;
+    margin-top: 8px;
+}
+
+/* ===== ABOUT MODAL (same theme as info panel) ===== */
+.about-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.25s ease;
+}
+
+.about-modal.hidden {
+    display: none;
+}
+
+.about-modal-content {
+    background: rgba(12, 18, 35, 0.082);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 28px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    color: #f0f3fa;
+    font-family: 'Segoe UI', system-ui;
+    overflow: hidden;
+}
+
+.about-modal-header {
+    padding: 1.2rem 1.8rem 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.about-modal-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #fff, #aaccff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.about-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.2rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.about-modal-body p {
+    margin: 0;
+}
+
+.about-modal-footer {
+    padding: 1rem 1.8rem 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel-modal-btn {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    border-radius: 40px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.cancel-modal-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.02);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Scrollbar inside modal matches info panel */
+.about-modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+.about-modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+.about-modal-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+/* Wider modal for About the Website */
+.about-modal-wide .about-modal-content {
+    max-width: 800px;
+    width: 90%;
+}
+
+/* Scrollable fun facts inside the about modal */
+.fun-facts-scroll {
+    background: rgba(189, 148, 73, 0.1);
+    border-radius: 18px;
+    padding: 0.8rem 1rem;
+    border-left: 3px solid #ffbc6e;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-top: 8px;
+}
+
+.fun-facts-scroll ul {
+    margin: 8px 0 0 0;
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.fun-facts-scroll li {
+    margin-bottom: 6px;
+}
+
+/* Custom scrollbar for fun facts (matches existing style) */
+.fun-facts-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+.fun-facts-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+.fun-facts-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
 }

@@ -10,7 +10,7 @@ const tiltRad = 25.2 * Math.PI / 180;
 marsGroup.rotation.x = tiltRad;
 marsGroup.rotation.z = 0.01;
 
-export const marsOrbitRadius = 15.0;
+export const marsOrbitRadius = 54.4;
 export let marsAngle = 4.5;
 export const marsSpeed = 0.0009;
 

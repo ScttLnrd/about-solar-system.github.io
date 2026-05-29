@@ -8,10 +8,10 @@ const moonTiltRad = 1.5 * Math.PI / 180;
 moonMesh.rotation.x = moonTiltRad;
 moonMesh.rotation.z = 0.01;
 
-export const moonOrbitRadius = 1.6;
+export const moonOrbitRadius = 3.6;
 export let moonAngle = 0;
-export const moonSpeed = -0.012;
-export const moonTextureOffset = 0.5;
+export const moonSpeed = -0.00052;
+export const moonTextureOffset = -0.2;
 
 // Moon orbit ring visual (created in main, but we export it)
 let moonOrbitRing = null;
@@ -28,3 +28,4 @@ export function moonUpdate(delta, earthPos) {
     moonMesh.position.set(earthPos.x + offsetX, earthPos.y, earthPos.z + offsetZ);
     moonMesh.rotation.y = (moonAngle + Math.PI + moonTextureOffset) * -1;
 }
+

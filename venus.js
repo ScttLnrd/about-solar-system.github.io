@@ -10,7 +10,7 @@ const tiltRad = 177 * Math.PI / 180;
 venusGroup.rotation.x = tiltRad;
 venusGroup.rotation.z = 0.03;
 
-export const venusOrbitRadius = 8.2;
+export const venusOrbitRadius = 25.9;
 export let venusAngle = 1.8;
 export const venusSpeed = 0.0018;
 

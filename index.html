@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Solar System Explorer - 3D Interactive</title>
+    <link rel="stylesheet" href="space-style.css">
+</head>
+<body>
+    <!-- Sidebar left -->
+    <div class="sidebar-row">
+        <div class="sidebar" id="sidebar">
+            <h2 class="sidebar-title">Solar System</h2>
+            <div class="planet-buttons" id="planetButtons">
+                <button id="btn-sun">Sun</button>
+                <button id="btn-mercury">Mercury</button>
+                <button id="btn-venus">Venus</button>
+                <button id="btn-earth">Earth</button>
+                <button id="btn-moon">Moon</button>
+                <button id="btn-mars">Mars</button>
+                <button id="btn-jupiter">Jupiter</button>
+                <button id="btn-saturn">Saturn</button>
+                <button id="btn-uranus">Uranus</button>
+                <button id="btn-neptune">Neptune</button>
+                <br><br><br>
+                <button id="aboutLink">About Solar System</button>
+            </div>
+            <div class="sidebar-footer">
+                <div class="divider"></div>
+                <p>Textures: NASA / Solar System Scope</p>
+                <p>Three.js Interactive</p>
+                <div class="social-links">
+                    <a href="#" id="aboutWebsite">About</a>
+                </div>
+            </div>
+        </div>
+        <button class="sidebar-toggle" id="toggleSidebarBtn">❮</button>
+    </div>
+
+    <!-- INFO PANEL (right side) -->
+    <div id="infoPanel" class="info-panel hidden">
+        <div class="info-panel-header">
+            <button id="viewButtonInside" class="view-btn-panel">View</button>
+            <h2 id="infoTitle" class="info-title">Loading...</h2>
+        </div>
+        <div class="info-content-scroll">
+            <div class="info-row"><span class="info-label">Type:</span><span id="infoType" class="info-value">—</span></div>
+            <div class="info-row"><span class="info-label">Mass:</span><span id="infoMass" class="info-value">—</span></div>
+            <div class="info-row"><span class="info-label">Elements found:</span><span id="infoElements" class="info-value">—</span></div>
+            <div><span class="info-label">About</span></div>
+            <div id="infoAbout" class="about-box">—</div>
+            <div><span class="info-label">Fun fact</span></div>
+            <div id="infoFunFact" class="fun-fact-box">—</div>
+            <div><span class="info-label">Links | Sources</span></div>
+            <div class="links-area" id="infoLinks"></div>
+        </div>
+    </div>
+
+    <!-- Trapezoid toggle button (appears when panel hidden) -->
+    <button id="infoTrapezoid" class="info-trapezoid">❮</button>
+
+        <!-- ABOUT MODAL (Solar System information) -->
+    <div id="aboutModal" class="about-modal hidden">
+        <div class="about-modal-content">
+            <div class="about-modal-header">
+                <h2>About the Solar System</h2>
+            </div>
+            <div class="about-modal-body">
+                <p>The Solar System is a vast collection of celestial bodies bound together by the gravity of the Sun. It formed around 4.6 billion years ago from a massive cloud of gas and dust called the solar nebula. At the center of the Solar System is the Sun, a giant star that provides heat, light, and energy to all the objects orbiting around it. Surrounding the Sun are eight major planets, their moons, dwarf planets, asteroids, comets, meteoroids, and countless smaller objects traveling through space.</p>
+                <p>The planets are divided into two main groups. The inner planets — Mercury, Venus, Earth, and Mars — are rocky terrestrial planets with solid surfaces. Beyond them lies the asteroid belt, followed by the outer planets — Jupiter, Saturn, Uranus, and Neptune — which are massive gas and ice giants. Farther away are icy dwarf planets such as Pluto and distant regions like the Kuiper Belt and the Oort Cloud.</p>
+                <p>The Solar System is constantly moving and changing. Planets rotate on their axes while orbiting the Sun, moons orbit planets, and comets travel in long elliptical paths. Scientists study the Solar System to understand how planets form, how life began on Earth, and whether life may exist elsewhere in space. Through telescopes, satellites, robotic probes, and human exploration missions, humanity continues to discover new information about the incredible system we call home.</p>
+                
+                <!-- Scrollable fun facts section -->
+                <div class="fun-facts-scroll">
+                    <strong>Fun Facts</strong>
+                    <ul>
+                        <li>The Solar System is about 4.6 billion years old.</li>
+                        <li>The Sun contains around 99.8% of the Solar System’s total mass.</li>
+                        <li>There are 8 official planets in the Solar System.</li>
+                        <li>The Solar System is located inside the Milky Way galaxy.</li>
+                        <li>Light from the Sun takes about 8 minutes and 20 seconds to reach Earth.</li>
+                        <li>Jupiter is so massive that all the other planets could fit inside it combined.</li>
+                        <li>Venus is the hottest planet even though Mercury is closer to the Sun.</li>
+                        <li>Uranus rotates almost completely sideways.</li>
+                        <li>A single day on Venus lasts longer than its year.</li>
+                        <li>Saturn could theoretically float in water because its average density is lower than water.</li>
+                        <li>Winds on Neptune can move faster than the speed of sound on Earth.</li>
+                        <li>Mars has the largest volcano in the Solar System, Olympus Mons.</li>
+                        <li>The Moon is slowly moving away from Earth every year.</li>
+                        <li>Mercury has almost no atmosphere, so there is no weather there.</li>
+                        <li>The rings of Saturn are mostly made of ice.</li>
+                        <li>Jupiter has a storm called the Great Red Spot that has lasted for centuries.</li>
+                        <li>Earth is currently the only known planet with life.</li>
+                        <li>Neptune was discovered using mathematical calculations before it was directly observed.</li>
+                        <li>Some moons, such as Europa and Enceladus, may have underground oceans that could potentially support life.</li>
+                        <li>The Solar System does not end at Neptune; it extends far into icy regions called the Kuiper Belt and possibly the Oort Cloud.</li>
+                        <li>If the Sun suddenly disappeared, Earth would continue orbiting for about 8 minutes before noticing because gravity travels at the speed of light.</li>
+                        <li>The footprints left by astronauts on the Moon may remain there for millions of years because there is almost no wind or rain.</li>
+                        <li>Jupiter has the shortest day of all planets, rotating once in under 10 hours.</li>
+                        <li>One year on Neptune equals about 165 Earth years.</li>
+                        <li>Scientists believe there may be billions of other planetary systems beyond our own Solar System.</li>
+                    </ul>
+                </div>
+
+                <div class="links-area" style="margin-top: 16px;">
+                    <strong>Links | Sources</strong><br>
+                    <a href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">🔗 NASA Solar System Exploration</a>
+                    <a href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noopener noreferrer">🔗 ESA Space Science</a>
+                </div>
+            </div>
+            <div class="about-modal-footer">
+                <button id="closeModalBtn" class="cancel-modal-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+        <!-- ABOUT WEBSITE MODAL (wider) -->
+    <div id="aboutWebsiteModal" class="about-modal about-modal-wide hidden">
+        <div class="about-modal-content">
+            <div class="about-modal-header">
+                <h2>About the Website</h2>
+            </div>
+            <div class="about-modal-body">
+                <p>Welcome to our Solar System Explorer, an interactive 3D visualization platform that lets you explore the planets, moons, and other celestial bodies in our Solar System. Using the power of Three.js, this website offers a fully immersive experience where you can freely navigate through space, zoom in on planets, and examine them from any angle.</p>
+                <p>Each celestial body — from the Sun to Neptune — features a detailed information panel that appears when selected. You can learn about each planet’s type, mass, chemical composition, atmospheric characteristics, rotation, and other scientific facts. Fun facts and direct links to NASA and ESA mission pages are also provided for further exploration.</p>
+                <p>The website includes realistic orbital motion, axial tilts, Saturn’s iconic rings, a dense asteroid belt, and a rotating starfield with twinkling stars. You can click any planet button in the sidebar to fly directly to that world, or use your mouse to rotate, zoom, and pan around the entire system. An additional "About the Solar System" modal provides a concise overview of our cosmic neighborhood.</p>
+                <p>All scientific information is based on publicly available data from NASA’s Solar System Exploration division and other reliable space science sources. The goal of this project is to make astronomy engaging, educational, and visually captivating for students, space enthusiasts, and anyone curious about the wonders of our Solar System.</p>
+            </div>
+            <div class="about-modal-footer">
+                <button id="closeWebsiteModalBtn" class="cancel-modal-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debug overlay (coordinates & angle) -->
+    <div id="debugPanel" class="debug-panel">
+        <h4>📐 Camera Debug</h4>
+        <p>📍 Pos: <span id="camPos">-</span></p>
+        <p>🎯 Target: <span id="camTarget">-</span></p>
+        <p>🧭 Dir→Tar: <span id="camDir">-</span></p>
+        <p>📏 Distance: <span id="camDistance">-</span></p>
+        <p>📐 Offset (planet→cam): <span id="camOffsetDir">-</span></p>
+        <div class="hint">💡 Drag mouse to change angle | Press C to hide/show</div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }
+        }
+    </script>
+    
+    <script type="module" src="main.js"></script>
+    <script>
+        // Sidebar toggle logic (keep as is)
+        (function() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('toggleSidebarBtn');
+            function updateToggleButton() {
+                toggleBtn.textContent = sidebar.classList.contains('collapsed') ? '❯' : '❮';
+            }
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+                updateToggleButton();
+            });
+            sidebar.classList.remove('collapsed');
+            updateToggleButton();
+        })();
+
+        // Debug panel toggle (press C)
+        const debugPanel = document.getElementById('debugPanel');
+        let debugVisible = false;
+        function toggleDebug() {
+            debugVisible = !debugVisible;
+            if (debugVisible) {
+                debugPanel.classList.add('visible');
+            } else {
+                debugPanel.classList.remove('visible');
+            }
+        }
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'c' || e.key === 'C') {
+                toggleDebug();
+                e.preventDefault();
+            }
+        });
+
+        // --- About Modal logic ---
+        const aboutLink = document.getElementById('aboutLink');
+        const aboutModal = document.getElementById('aboutModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        function openModal() {
+            aboutModal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            aboutModal.classList.add('hidden');
+        }
+
+        if (aboutLink) {
+            aboutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                closeModal();
+            });
+        }
+
+        // Click outside modal content to close (optional)
+        if (aboutModal) {
+            aboutModal.addEventListener('click', (e) => {
+                if (e.target === aboutModal) {
+                    closeModal();
+                }
+            });
+        }
+
+                // --- About Website Modal logic ---
+        const aboutWebsiteLink = document.getElementById('aboutWebsite');
+        const aboutWebsiteModal = document.getElementById('aboutWebsiteModal');
+        const closeWebsiteModalBtn = document.getElementById('closeWebsiteModalBtn');
+
+        function openWebsiteModal() {
+            aboutWebsiteModal.classList.remove('hidden');
+        }
+
+        function closeWebsiteModal() {
+            aboutWebsiteModal.classList.add('hidden');
+        }
+
+        if (aboutWebsiteLink) {
+            aboutWebsiteLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                openWebsiteModal();
+            });
+        }
+
+        if (closeWebsiteModalBtn) {
+            closeWebsiteModalBtn.addEventListener('click', () => {
+                closeWebsiteModal();
+            });
+        }
+
+        // Click outside modal content to close
+        if (aboutWebsiteModal) {
+            aboutWebsiteModal.addEventListener('click', (e) => {
+                if (e.target === aboutWebsiteModal) {
+                    closeWebsiteModal();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

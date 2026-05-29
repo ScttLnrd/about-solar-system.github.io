@@ -18,7 +18,7 @@ const tiltRad = 23.5 * Math.PI / 180;
 earthGroup.rotation.x = tiltRad;
 earthGroup.rotation.z = 0.02;
 
-export const earthOrbitRadius = 11.2;
+export const earthOrbitRadius = 40.3;
 export let earthAngle = 3.0;
 export const earthSpeed = 0.0012;
 
