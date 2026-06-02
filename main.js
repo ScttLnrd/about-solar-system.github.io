@@ -452,7 +452,6 @@ function onPlanetButtonClick(button, planet, offsetDir, distance, targetOffset, 
     }
 }
 
-const rightOffset = new THREE.Vector3(0, 0, 0);
 const centerOffset = new THREE.Vector3(0, 0, 0);
 document.getElementById('btn-sun').addEventListener('click', () => onPlanetButtonClick(
     document.getElementById('btn-sun'), sunMesh, new THREE.Vector3(0,2,12), 12, centerOffset, 'sun'
