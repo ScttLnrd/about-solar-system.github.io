@@ -410,7 +410,7 @@ viewButton.addEventListener('click', () => {
 if (infoTrapezoid) {
     infoTrapezoid.addEventListener('click', () => {
         if (followObject) {
-            followTargetOffset.set(2.4, 0, 0);
+            followTargetOffset.set(0, 0, 0);
             controls.target.copy(followObject.position.clone().add(followTargetOffset));
             controls.update();
             showInfoPanel();
@@ -452,36 +452,37 @@ function onPlanetButtonClick(button, planet, offsetDir, distance, targetOffset, 
     }
 }
 
-const rightOffset = new THREE.Vector3(1.6, 0, 0);
+const rightOffset = new THREE.Vector3(0, 0, 0);
+const centerOffset = new THREE.Vector3(0, 0, 0);
 document.getElementById('btn-sun').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-sun'), sunMesh, new THREE.Vector3(0,2,12), 12, rightOffset, 'sun'
+    document.getElementById('btn-sun'), sunMesh, new THREE.Vector3(0,2,12), 12, centerOffset, 'sun'
 ));
 document.getElementById('btn-mercury').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-mercury'), mercuryMesh, new THREE.Vector3(-0.9,0.05,0.5), 2.6, rightOffset, 'mercury'
+    document.getElementById('btn-mercury'), mercuryMesh, new THREE.Vector3(-0.9,0.05,0.5), 2.6, centerOffset, 'mercury'
 ));
 document.getElementById('btn-venus').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-venus'), venusGroup, new THREE.Vector3(-0.82,0.05,0.5), 3.5, rightOffset, 'venus'
+    document.getElementById('btn-venus'), venusGroup, new THREE.Vector3(-0.82,0.05,0.5), 3.5, centerOffset, 'venus'
 ));
 document.getElementById('btn-earth').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-earth'), earthGroup, new THREE.Vector3(-0.85,0.03,0.5), 2.5, rightOffset, 'earth'
+    document.getElementById('btn-earth'), earthGroup, new THREE.Vector3(-0.85,0.03,0.5), 2.5, centerOffset, 'earth'
 ));
 document.getElementById('btn-mars').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-mars'), marsGroup, new THREE.Vector3(-0.9,0.03,0.5), 2.4, rightOffset, 'mars'
+    document.getElementById('btn-mars'), marsGroup, new THREE.Vector3(-0.9,0.03,0.5), 2.4, centerOffset, 'mars'
 ));
 document.getElementById('btn-jupiter').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-jupiter'), jupiterGroup, new THREE.Vector3(-0.8,0.02,0.6), 4.4, rightOffset, 'jupiter'
+    document.getElementById('btn-jupiter'), jupiterGroup, new THREE.Vector3(-0.8,0.02,0.6), 4.4, centerOffset, 'jupiter'
 ));
 document.getElementById('btn-saturn').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-saturn'), saturnGroup, new THREE.Vector3(0.9,0.05,0.4), 5.0, rightOffset, 'saturn'
+    document.getElementById('btn-saturn'), saturnGroup, new THREE.Vector3(0.9,0.05,0.4), 5.0, centerOffset, 'saturn'
 ));
 document.getElementById('btn-uranus').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-uranus'), uranusGroup, new THREE.Vector3(0.85,0.06,0.5), 5.0, rightOffset, 'uranus'
+    document.getElementById('btn-uranus'), uranusGroup, new THREE.Vector3(0.85,0.06,0.5), 5.0, centerOffset, 'uranus'
 ));
 document.getElementById('btn-neptune').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-neptune'), neptuneGroup, new THREE.Vector3(-0.8,0.02,0.5), 5.0, rightOffset, 'neptune'
+    document.getElementById('btn-neptune'), neptuneGroup, new THREE.Vector3(-0.8,0.02,0.5), 5.0, centerOffset, 'neptune'
 ));
 document.getElementById('btn-moon').addEventListener('click', () => onPlanetButtonClick(
-    document.getElementById('btn-moon'), moonMesh, new THREE.Vector3(-0.93,0.04,0.35), 3, rightOffset, 'moon'
+    document.getElementById('btn-moon'), moonMesh, new THREE.Vector3(-0.93,0.04,0.35), 3, centerOffset, 'moon'
 ));
 
 camera.position.copy(overviewCameraPos);
